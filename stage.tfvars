@@ -1,0 +1,1 @@
+user_table = "stage-test2"
