@@ -21,6 +21,21 @@ module "iam" {
   backend_bucket_arn = module.s3.bucket_arn
 }
 
+module "lambda_function_get_all_authors" {
+  source = "terraform-aws-modules/lambda/aws"
+  version = "3.2.0"
+  function_name = "my-lambda1-get_all_authors"
+  description   = "get all authors"
+  handler       = "index.handler"
+  runtime       = "nodejs12.x"
+
+  source_path = "./lambda_source/get_all_authors/index.js"
+
+  tags = {
+    Name = "my-lambda1"
+  }
+}
+
 
 
 
