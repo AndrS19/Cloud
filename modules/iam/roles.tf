@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "lambda_read" {
+data "aws_iam_policy_document" "get_all_authors" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -9,19 +9,13 @@ data "aws_iam_policy_document" "lambda_read" {
   }
 }
 
-resource "aws_iam_role" "lambda_read" {
-  name               = "${module.label.id}-lambda-read"
+resource "aws_iam_role" "get_all_authors" {
+  name               = "${module.label.id}-get-all-authors"
   path               = "/"
-  assume_role_policy = data.aws_iam_policy_document.lambda_read.json
+  assume_role_policy = data.aws_iam_policy_document.get_all_authors.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_read" {
-  role       = aws_iam_role.lambda_read.name
-  policy_arn = aws_iam_policy.s3_backend.arn
-}
-
-resource "aws_iam_role_policy" "lambda_read_inline" {
-  name = "${module.label.id}-lambda-read-inline"
-  role = aws_iam_role.lambda_read.name
-  policy = data.aws_iam_policy_document.s3_backend.json
+resource "aws_iam_role_policy_attachment" "get_all_authors" {
+  role       = aws_iam_role.get_all_authors.name
+  policy_arn = aws_iam_policy.get_all_authors.arn
 }

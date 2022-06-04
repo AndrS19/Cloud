@@ -1,1 +1,3 @@
-user_table = "stage-test2"
+namespace  = "lpnu"
+stage      = "stage"
+label_order = [ "stage", "namespace", "environment", "name", "attributes" ]
