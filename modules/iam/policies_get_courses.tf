@@ -27,12 +27,15 @@ data "aws_iam_policy_document" "get_all_courses_cloudwatch" {
     sid = "cloudwatch"
 
     actions = [
-      "logs:CreateLogStream",
+      "logs:CreateLogStream",    
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
       "logs:PutLogEvents"
     ]
 
     resources = [
-      var.get_all_courses_log_group_arn
+      var.cw_log_group_get_all_courses_arn,
+      "${var.cw_log_group_get_all_courses_arn}:*"
     ]
   }
 }
