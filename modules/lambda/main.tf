@@ -28,3 +28,23 @@ module "lambda_function_get_all_authors" {
 
   tags = module.label.tags
 }
+
+module "lambda_function_get_all_courses" {
+  source = "terraform-aws-modules/lambda/aws"
+  version = "3.2.0"
+  function_name = "${module.label.id}-get-all-courses"
+  description   = "get all courses"
+  handler       = "index.handler"
+  runtime       = "nodejs12.x"
+  create_role   = false
+  lambda_role   = var.get_all_courses_role_arn
+  use_existing_cloudwatch_log_group = false
+
+  source_path = "${path.module}/lambda_source/get_all_courses/index.js"
+
+  environment_variables = {
+    TABLE_NAME = var.dynamo_db_courses_name
+  }
+
+  tags = module.label.tags
+}
