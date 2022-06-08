@@ -8,6 +8,7 @@ exports.handler = (event, context, callback) => {
   const params = {
     TableName: process.env.TABLE_NAME
   };
+  
   dynamodb.scan(params, (err, data) => {
     if (err) {
       console.log(err);

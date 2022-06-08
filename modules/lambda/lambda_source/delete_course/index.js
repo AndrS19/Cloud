@@ -6,18 +6,19 @@ const dynamodb = new AWS.DynamoDB({
 
 exports.handler = (event, context, callback) => {
   const params = {
-    TableName: process.env.TABLE_NAME
+    Key: {
+      id: {
+        S: event.id
+      }
+    },
+    TableName: "courses"
   };
-  
-  dynamodb.scan(params, (err, data) => {
-    if(err) {
+  dynamodb.deleteItem(params, (err, data) => {
+    if (err) {
       console.log(err);
       callback(err);
     } else {
-      const authors = data.Items.map(item => {
-        return { id: item.id.S, firstName: item.firstName.S, lastName: item.lastName.S };
-      });
-      callback(null, authors);
+      callback(null, data);
     }
   });
 };

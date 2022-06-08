@@ -14,6 +14,22 @@ variable "get_all_courses_role_arn" {
   type = string
 }
 
+variable "get_one_course_role_arn" {
+  type = string
+}
+
+variable "save_course_role_arn" {
+  type = string
+}
+
+variable "update_course_role_arn" {
+  type = string
+}
+
+variable "delete_course_role_arn" {
+  type = string
+}
+
 variable "aws_lambda_permission_api_gateway_source_arn" {
   type = string
 }
